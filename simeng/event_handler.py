@@ -15,10 +15,15 @@ class EventHandler():
 
         @window.event
         def on_mouse_press(x, y, button, modifiers):
-            if button == mouse.LEFT:
-                print('The left mouse button was pressed.')
+            self.mouse_pos['x'] = x
+            self.mouse_pos['y'] = y
 
         @window.event
         def on_mouse_motion(x, y, dx, dy):
+            self.mouse_pos['x'] = x
+            self.mouse_pos['y'] = y
+
+        @window.event
+        def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
             self.mouse_pos['x'] = x
             self.mouse_pos['y'] = y
