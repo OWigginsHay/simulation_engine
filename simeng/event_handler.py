@@ -1,5 +1,6 @@
 import pyglet
 from pyglet.window import mouse
+
 class EventHandler():
 
     def __init__(self, window):

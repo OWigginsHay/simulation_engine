@@ -11,14 +11,11 @@ class Engine():
 
     def __init__(self):
         self.display = pyglet.canvas.get_display()
-        self.window = pyglet.window.Window(style = pyglet.window.Window.WINDOW_STYLE_DEFAULT, caption = "League of Legends")
+        self.window = pyglet.window.Window(style = pyglet.window.Window.WINDOW_STYLE_DEFAULT, caption = "Simulation Engine")
         self.icon = pyglet.image.load('icon.png')
         self.window.set_icon(self.icon)
         self.event_handler = EventHandler(self.window)
         self.current_screen = MainScene(self)
-    
-    def shit(self):
-        pass
 
 engine = Engine()
 
