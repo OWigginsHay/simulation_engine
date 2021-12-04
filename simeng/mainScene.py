@@ -1,5 +1,6 @@
-from scene import Scene
+from simeng.scene import Scene
 import pyglet
+from simeng.data_structs.cell import Cell
 
 class MainScene(Scene):
 
@@ -21,3 +22,4 @@ class MainScene(Scene):
             x=self.window.width//2, y=self.window.height//2,
             anchor_x='center', anchor_y='center')
         label.draw()
+        Cell().draw()
