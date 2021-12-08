@@ -4,10 +4,11 @@ from simeng.data_structs.cell import Cell
 
 class MainScene(Scene):
 
-    def __init__(self, canvas):
+    def __init__(self, canvas, data, width, height):
         self.canvas = canvas
         self.window = canvas.window
         self.event_handler = canvas.event_handler
+        self.data = data(6, 6, width=width, height=height)
 
         self.start()
 
@@ -22,4 +23,4 @@ class MainScene(Scene):
             x=self.window.width//2, y=self.window.height//2,
             anchor_x='center', anchor_y='center')
         label.draw()
-        Cell().draw()
+        self.data.update()
