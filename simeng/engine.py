@@ -21,11 +21,9 @@ class Engine():
 
     def run(self):
         event_loop = pyglet.app.EventLoop()
-
         @event_loop.event
         def on_window_close(window):
             event_loop.exit()
-
         pyglet.app.run()
 
 if __name__ == '__main__':
