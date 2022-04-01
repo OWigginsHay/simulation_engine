@@ -1,9 +1,4 @@
 from pyglet import shapes
-import events
-
-class MyEvents(events.Events):
-
-    __events__ = ('on_this', 'on_that', )
 
 class Cell:
 
@@ -13,10 +8,5 @@ class Cell:
     def draw(self):
         self.square.draw()
 
-m = MyEvents()
-
 def lol():
     print("spook")
-
-m.on_this += lol
-m.on_this()
