@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Container(ABC):
+class DataContainer(ABC):
 
     @abstractmethod
     def update():

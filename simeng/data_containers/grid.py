@@ -1,9 +1,9 @@
 from typing import Container
 import pyglet
 from simeng.data_structs.cell import Cell
-from simeng.data_containers.container import Container
+from simeng.data_containers.container import DataContainer
 
-class Grid(Container):
+class Grid(DataContainer):
 
     def __init__(self, x, y, width=10, height=10):
         self.x = x
