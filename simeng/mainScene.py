@@ -1,8 +1,7 @@
-from simeng.scene import Scene
+#from simeng.scene import Scene
 import pyglet
-from simeng.data_structs.cell import Cell
 
-class MainScene(Scene):
+class MainScene:
 
     def __init__(self, canvas, data, width, height, tmpsc):
         self.canvas = canvas
@@ -24,4 +23,3 @@ class MainScene(Scene):
             anchor_x='center', anchor_y='center')
         label.draw()
         self.tmpsc.draw()
-        #self.data.update()

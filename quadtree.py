@@ -237,9 +237,9 @@ ax.set_xlim(0, width)
 ax.set_ylim(0, height)
 qtree.draw(ax)
 
-# ax.scatter([p.x for p in points], [p.y for p in points], s=4)
-# ax.set_xticks([])
-# ax.set_yticks([])
+ax.scatter([p.x for p in points], [p.y for p in points], s=4)
+ax.set_xticks([])
+ax.set_yticks([])
 
 region = Rect(140, 190, 150, 150)
 found_points = []

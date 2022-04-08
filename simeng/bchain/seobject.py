@@ -1,29 +1,29 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+import typing
 if TYPE_CHECKING:
     from ..graphics import Shape
+    from . import Container
 
 class SEObject:
 
-    def __init__(self):
-        self.owner = None
-        self.shape_callback = None
+    def __init__(self, **init):
+        self.owner:Container = None
+        self.__shape_callback:typing.Callable[[dict]] = None
 
-    def logic(self):
+    def _logic(self):
         pass
 
-    def update(self):
-        self.logic()
-        state = self.declare_variables()
-        self.shape_callback(state)
-
-    def declare_variables(self) -> dict:
+    def _declare_variables(self) -> dict:
         return {}
 
-    def expose_outlets(self):
-        #return a dictionary mapping keys to instance members
-        self.shape_callback(self.declare_variables())
-        pass
+    def __update(self):
+        self._logic()
+        state = self._declare_variables()
+        self.__shape_callback(state)
+
+    def update(self):
+        self.__update()
 
     def attach_outlets(self, shape: Shape):
-        self.shape_callback = shape.update_state
+        self.__shape_callback = shape.update_state

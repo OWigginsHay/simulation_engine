@@ -14,10 +14,3 @@ class Test(SEObject):
 
     def declare_variables(self):
         return {"x":self.x,"y":self.y}
-
-
-l = Layer()
-c = Container(Test)
-#c.make(10)
-l.attach(c)
-l['Test'].make(10)

@@ -8,18 +8,27 @@ import random
 
 class Container:
 
-    def __init__(self, userType):
-        self.of_type = userType.__name__
-        self.spawn_type = userType
-        self.children: typing.List[SEObject] = []
+    def __init__(self, userType: typing.Type[SEObject]):
+        self.of_type:str = userType.__name__
+        self.spawn_type:typing.Callable[[dict], SEObject] = userType
+        self.__children: typing.List[SEObject] = []
 
     def make(self, n=1) -> typing.List[SEObject]:
+        args = []
+        kwargs = {}
         for _ in range(n):
-            child = self.spawn_type()
+            child = self.spawn_type(*args, **kwargs)
             child.owner = self
-            self.children.append(child)
-        return self.children
+            self.__children.append(child)
+        return self.__children
 
-    def draw(self):
-        for child in self.children:
+    def get_children(self):
+        return self.__children
+
+    def update(self):
+        for child in self.__children:
             child.update()
+
+    def get_closest(self, obj: SEObject):
+        if obj.__class__.__name__ in self.of_type:
+            print("yes")

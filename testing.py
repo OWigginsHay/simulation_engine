@@ -1,69 +1,60 @@
-from ast import Sub
+
 import random
-import typing
-from enum import Enum
-from typing import Dict
-import numpy as np
+import pyglet
 from simeng.bchain import *
+from simeng.data_containers import Grid
+from simeng import Engine
 
-class Subscriber:
-    def __init__(self, name):
-        self.name = name
-    def update(self, message):
-        print("{} got message: {}".format(self.name, message))
-
-class Subscriber2:
-    def __init__(self, name):
-        self.name = name
-
-    def recieve(self, message):
-        print("{} got message: {}".format(self.name, message))
-
-class Publisher:
-    def __init__(self, events):
-        self.subscribers = {event : dict() 
-                            for event in events}
-    def get_subscribers(self, event):
-        return self.subscribers[event]
-    def register(self, event, who, callback=None):
-        if callback is None:
-            callback = getattr(who, "update")
-        self.get_subscribers(event=event)[who] = callback
-    def unregister(self, event, who):
-        del self.get_subscribers(event)[who]
-    def dispatch(self, event, message):
-        for _, callback in self.get_subscribers(event).items():
-            callback(message)
-
-
-class Point(SEObject):
+class Food(SEObject):
 
     def __init__(self):
-        super().__init__()
-        self.x = 0
-        self.y = 0
+        self.energy = 10
+        self.x = random.randint(0, 800)
+        self.y = random.randint(0,800)
 
-    def exposeOutputs(self):
-        return {
-            'x':self.x, 
-            'y':self.y,
-            }
+    def _logic(self):
+        pass
 
-l = Layer()
-l.attach(Container(Point))
-l['Point'].make(10)[0].owner
+    def _declare_variables(self) -> dict:
+        return {"x": self.x, "y": self.y, "colour":(0,255,0)}
 
 
+#Define some object with behaviour
+class Test(SEObject):
 
-# pub = Publisher(['lunch', 'dinner'])
+    def __init__(self, **init):
+        super().__init__(**init)
+        self.velocityx = 0
+        self.velocityy = 0
+        self.x = 400
+        self.y = 400
+        self.delta = 1/120
 
-# bob = Subscriber("bob")
-# alice = Subscriber2("alice")
-# john = Subscriber("john")
+        self.r = random.randint(0,255)
+        self.g = random.randint(0,255)
+        self.b = random.randint(0,255)
 
-# pub.register('lunch', bob)
-# pub.register('lunch', alice, alice.recieve)
-# pub.register('dinner', john)
+    def _logic(self):
+        self.velocityx += 40*(random.random()-.5)*self.delta
+        self.velocityy += 40*(random.random()-.5)*self.delta
+        self.x += self.velocityx*self.delta
+        self.y += self.velocityy*self.delta
+        self.owner.get_closest(self)
 
-# pub.dispatch('lunch', "Lunch time")
-# pub.dispatch('dinner', "Dinner time")
+    def _declare_variables(self):
+        #print("declared")
+        return {"x": self.x, "y": self.y, "colour":(self.r, self.g, self.b)}
+
+#Define Structure 
+layer = Layer()
+container = Container(Test)
+container.make(10)
+food_container = Container(Food)
+food_container.make(40)
+layer.attach(food_container)
+layer.attach(container)
+
+#Init and provide data to Engine
+engine = Engine(Grid)
+engine.initialize_layer(layer)
+engine.run()

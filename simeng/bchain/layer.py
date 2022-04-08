@@ -1,12 +1,13 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+import typing
 if TYPE_CHECKING:
     from . import Container
 
 class Layer:
 
     def __init__(self):
-        self.contains_types = dict()
+        self.contains_types:typing.Dict[str, Container] = dict()
 
     def attach(self, container: Container):
         if not container.of_type in self.contains_types:
@@ -17,6 +18,6 @@ class Layer:
     def __getitem__(self, item) -> Container:
         return self.contains_types[item]
 
-    def draw(self):
+    def update(self):
         for item in self.contains_types.items():
-            item[1].draw()
+            item[1].update()
