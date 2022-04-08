@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-class Object(ABC):
+class DataContainer(ABC):
 
     @abstractmethod
-    def behaviour(self):
+    def update():
         pass
