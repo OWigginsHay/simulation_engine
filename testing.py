@@ -15,8 +15,14 @@ class Food(SEObject):
     def _logic(self):
         pass
 
-    def _declare_variables(self) -> dict:
-        return {"x": self.x, "y": self.y, "colour":(0,255,0)}
+    def _declare_appearance(self) -> dict:
+        config = self.AppearanceConfiguration()
+        config.shape = config.Shapes.SQUARE
+        config.x = self.x
+        config.y = self.y
+        config.width = 20
+        config.colour = (0, 255, 0)
+        return config
 
 
 #Define some object with behaviour
@@ -44,6 +50,16 @@ class Test(SEObject):
     def _declare_variables(self):
         #print("declared")
         return {"x": self.x, "y": self.y, "colour":(self.r, self.g, self.b)}
+
+    def _declare_appearance(self) -> dict:
+        config = self.AppearanceConfiguration()
+        config.shape = config.Shapes.CIRCLE
+        config.colour = (self.r, self.g, self.b)
+        config.x = self.x
+        config.y = self.y
+        config.radius = 30
+        return config
+
 
 #Define Structure 
 layer = Layer()
