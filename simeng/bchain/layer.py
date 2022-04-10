@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import typing
-if TYPE_CHECKING:
-    from . import Container
+# if TYPE_CHECKING:
+#     from . import Container
 
 class Layer:
 

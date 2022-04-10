@@ -1,0 +1,26 @@
+digraph "classes" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{AppearanceConfiguration|Shapes\la : int\lb : int\lcolour : tuple\lheight : int\lopacity : int\lradius : int\lshape : CIRCLE\lvisible : bool\lwidth : int\lx : int\lx2 : int\ly : int\ly2 : int\l|}", shape="record"];
+"1" [label="{Container|of_type\lspawn_type\l|get_children()\lget_closest(obj)\lmake(n)\lupdate()\l}", shape="record"];
+"2" [label="{Engine|display : XlibDisplay, Display, CocoaDisplay, Win32Display, HeadlessDisplay\levent_handler\licon\llayer : NoneType\lsc\lwindow : HeadlessWindow, BaseWindow, CocoaWindow, XlibWindow, Win32Window\l|draw()\linitialize_layer(layer)\lrun()\lupdate(dt)\l}", shape="record"];
+"3" [label="{EventHandler|mouse_pos : dict\lwindow\l|}", shape="record"];
+"4" [label="{Layer|contains_types : dict\l|attach(container)\lupdate()\l}", shape="record"];
+"5" [label="{SECircle|shape : Circle\l|update_appearance(config)\l}", shape="record"];
+"6" [label="{SEEllipse|shape : Rectangle\l|update_appearance(config)\l}", shape="record"];
+"7" [label="{SEObject|AppearanceConfiguration\lowner : NoneType\l|attach_outlets(shape)\lupdate()\l}", shape="record"];
+"8" [label="{SERectangle|shape : Rectangle\l|update_appearance(config)\l}", shape="record"];
+"9" [label="{SESquare|shape : Rectangle\l|update_appearance(config)\l}", shape="record"];
+"10" [label="{ShapeContainer|batch : Batch\lshapes : list\l|add_shape(shape)\ldraw()\llink_to_object(seobject)\lmake_shape(config)\lremove_shape(shape)\l}", shape="record"];
+"11" [label="{ShapeFactory|shape_options : dict\l|make_shape(cls, batch, config)\l}", shape="record"];
+"12" [label="{Shapes|\l|}", shape="record"];
+"13" [label="{_SEShape|shape\l|listen_to_object(object)\lreveal_shape_dict()\lupdate_appearance(config)\lupdate_state(dic)\l}", shape="record"];
+"5" -> "13" [arrowhead="empty", arrowtail="none"];
+"6" -> "13" [arrowhead="empty", arrowtail="none"];
+"8" -> "13" [arrowhead="empty", arrowtail="none"];
+"9" -> "13" [arrowhead="empty", arrowtail="none"];
+"0" -> "7" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="AppearanceConfiguration", style="solid"];
+"3" -> "2" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="event_handler", style="solid"];
+"10" -> "2" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="sc", style="solid"];
+"12" -> "0" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="Shapes", style="solid"];
+}

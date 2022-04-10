@@ -2,12 +2,13 @@
 import random
 import pyglet
 from simeng.bchain import *
-from simeng.data_containers import Grid
 from simeng import Engine
+import cProfile
 
 class Food(SEObject):
 
-    def __init__(self):
+    def __init__(self, *args, **init):
+        super().__init__(**init)
         self.energy = 10
         self.x = random.randint(0, 800)
         self.y = random.randint(0,800)
@@ -28,7 +29,7 @@ class Food(SEObject):
 #Define some object with behaviour
 class Test(SEObject):
 
-    def __init__(self, **init):
+    def __init__(self, *args, **init):
         super().__init__(**init)
         self.velocityx = 0
         self.velocityy = 0
@@ -47,10 +48,6 @@ class Test(SEObject):
         self.y += self.velocityy*self.delta
         self.owner.get_closest(self)
 
-    def _declare_variables(self):
-        #print("declared")
-        return {"x": self.x, "y": self.y, "colour":(self.r, self.g, self.b)}
-
     def _declare_appearance(self) -> dict:
         config = self.AppearanceConfiguration()
         config.shape = config.Shapes.CIRCLE
@@ -64,13 +61,16 @@ class Test(SEObject):
 #Define Structure 
 layer = Layer()
 container = Container(Test)
-container.make(10)
+container.make(100)
 food_container = Container(Food)
 food_container.make(40)
 layer.attach(food_container)
 layer.attach(container)
 
 #Init and provide data to Engine
-engine = Engine(Grid)
+engine = Engine()
 engine.initialize_layer(layer)
-engine.run()
+
+profiler = cProfile.Profile()
+profiler.runcall(engine.run)
+profiler.print_stats()

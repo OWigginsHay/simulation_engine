@@ -1,0 +1,31 @@
+digraph "packages" {
+charset="utf-8"
+rankdir=BT
+"0" [label="simeng", shape="box"];
+"1" [label="simeng.bchain", shape="box"];
+"2" [label="simeng.bchain.container", shape="box"];
+"3" [label="simeng.bchain.layer", shape="box"];
+"4" [label="simeng.bchain.seobject", shape="box"];
+"5" [label="simeng.engine", shape="box"];
+"6" [label="simeng.event_handler", shape="box"];
+"7" [label="simeng.graphics", shape="box"];
+"8" [label="simeng.graphics.shape", shape="box"];
+"9" [label="simeng.graphics.shapeContainer", shape="box"];
+"0" -> "5" [arrowhead="open", arrowtail="none"];
+"0" -> "6" [arrowhead="open", arrowtail="none"];
+"1" -> "2" [arrowhead="open", arrowtail="none"];
+"1" -> "3" [arrowhead="open", arrowtail="none"];
+"1" -> "4" [arrowhead="open", arrowtail="none"];
+"2" -> "4" [arrowhead="open", arrowtail="none"];
+"5" -> "1" [arrowhead="open", arrowtail="none"];
+"5" -> "6" [arrowhead="open", arrowtail="none"];
+"5" -> "9" [arrowhead="open", arrowtail="none"];
+"7" -> "8" [arrowhead="open", arrowtail="none"];
+"7" -> "9" [arrowhead="open", arrowtail="none"];
+"8" -> "1" [arrowhead="open", arrowtail="none"];
+"8" -> "4" [arrowhead="open", arrowtail="none"];
+"9" -> "1" [arrowhead="open", arrowtail="none"];
+"9" -> "4" [arrowhead="open", arrowtail="none"];
+"9" -> "7" [arrowhead="open", arrowtail="none"];
+"9" -> "8" [arrowhead="open", arrowtail="none"];
+}

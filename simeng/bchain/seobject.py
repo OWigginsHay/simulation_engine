@@ -1,57 +1,22 @@
 from __future__ import annotations
+from ..graphics import AppearanceConfiguration
 from typing import TYPE_CHECKING
 import typing
-import inspect
 
-import pytest
-if TYPE_CHECKING:
-    from . import Container
-    from ..graphics import SEShape
-from enum import Enum
-import pyglet
-
-class Shapes(Enum):
-    CIRCLE = pyglet.shapes.Circle
-    SQUARE = pyglet.shapes.Rectangle
-    RECTANGLE = pyglet.shapes.Rectangle
-    ELLIPSE = pyglet.shapes.Ellipse
-    LINE = pyglet.shapes.Line
-    BORDER_RECTANGLE = pyglet.shapes.BorderedRectangle
-    TRIANGLE = pyglet.shapes.Triangle
-
-class AppearanceConfiguration:
-    Shapes = Shapes
-    def __init__(self):
-        self.shape: Shapes = Shapes.CIRCLE
-        self.x: int = 0
-        self.y: int = 0
-        self.visible: bool = True
-        self.colour = (255, 255, 255)
-        self.opacity: int = 255
-        self.radius = 0
-        #Ellipses
-        self.a = 0
-        self.b = 0
-        #Rectangle
-        self.height: int = 0
-        self.width: int = 0
-        #Lines
-        self.x2: int = 0
-        self.y2: int = 0
+# if TYPE_CHECKING:
+#     from . import Container
+#     from ..graphics import _SEShape
 
 class SEObject:
 
     AppearanceConfiguration = AppearanceConfiguration
 
-    def __init__(self, **init):
-        self.owner: Container = None
+    def __init__(self, *args, **init):
+        self.owner: Container = init.get('owner')
         self.__shape_callback: typing.Callable[[dict]] = None
 
     def _logic(self):
         pass
-
-    def _declare_variables(self) -> dict:
-        return {}
 
     def _declare_appearance(self) -> dict:
         config = self.AppearanceConfiguration()
@@ -65,10 +30,10 @@ class SEObject:
     def update(self):
         self.__update()
 
-    def attach_outlets(self, shape: SEShape):
+    def attach_outlets(self, shape: _SEShape):
         try:
-            from ..graphics import SEShape
-            assert issubclass(shape.__class__, SEShape)
+            from ..graphics import _SEShape
+            assert issubclass(shape.__class__, _SEShape)
         except AssertionError:
             for att in shape.__dir__():
                 print(att, ": ", getattr(shape, att))

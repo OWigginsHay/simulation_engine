@@ -1,10 +1,9 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from simeng.bchain.seobject import SEObject
+# if TYPE_CHECKING:
+#     from .seobject import SEObject
 
 import typing
-import random
 
 class Container:
 
@@ -15,11 +14,8 @@ class Container:
 
     def make(self, n=1) -> typing.List[SEObject]:
         args = []
-        kwargs = {}
-        for _ in range(n):
-            child = self.spawn_type(*args, **kwargs)
-            child.owner = self
-            self.__children.append(child)
+        kwargs = {'owner': self}
+        self.__children = [self.spawn_type(*args, **kwargs) for _ in range(n)]
         return self.__children
 
     def get_children(self):
@@ -30,5 +26,7 @@ class Container:
             child.update()
 
     def get_closest(self, obj: SEObject):
-        if obj.__class__.__name__ in self.of_type:
-            print("yes")
+        pass
+        # if obj.__class__.__name__ in self.of_type:
+        #     for child in self.__children:
+        #         pass
